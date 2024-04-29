@@ -31,7 +31,7 @@
     d.querySelector('#subscribe-text > p').innerHTML = 'Subscribe and receive new post notifications via email';
     d.querySelector('#custom_html-4 > h1').innerHTML = 'PLAY MY OST';
     d.querySelector('#block-2 > div > h2').innerHTML = "Week's Popular Repacks";
-    d.querySelector('#block-6 > div > div > h2').innerHTML = "Today's Popular"
+    d.querySelector('#block-6 > div > div > h2').innerHTML = "Today's Popular Repacks"
     d.querySelector('#custom_html-4 > div > p').innerHTML = `Regular Games
                                                              <iframe src="https://www.youtube.com/embed/72QAAOaYW2M" allowfullscreen="" width="100%" frameborder="0"></iframe>
                                                              Japanese Games
@@ -68,7 +68,7 @@
     let todaysPopular = d.createElement('aside');
     todaysPopular.setAttribute('class', 'widget widget_block');
     todaysPopular.innerHTML = `<div class="jetpack_top_posts_widget">
-                                  <h2 class="widgettitle">Todays's Popular Repacks</h2>
+                                  <h2 class="widgettitle">Today's Popular Repacks</h2>
                                   <div class="widgets-grid-layout no-grav">
                                      ${todaysPopularData}
                                   </div>
