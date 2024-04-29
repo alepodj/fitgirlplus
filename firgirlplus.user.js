@@ -262,6 +262,13 @@ img:hover {
    font-weight: bold;
 }
 
+/* Post navigation links adjustments */
+
+.post-navigation, .image-navigation {
+    max-width: 740px;
+    margin-left: 10px;
+}
+
 /* Move search button when site compresses and hamburger appears */
 
 @media screen and (max-width: 782px) {
