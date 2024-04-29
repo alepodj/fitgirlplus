@@ -15,7 +15,7 @@
     //Cause why not...
     let d = document;
 
-    //Rework site wording... a little bit, im not trying to be an asshole i promise, just to be concise and to the point ;)
+    //Rework site wording... a little bit, im not trying to be an ahole i promise, just to be concise and to the point, this also saves space in some cases ;)
     let menuItem40173 = d.querySelectorAll('.menu-item-40173 > a'), //"Popular Repacks" to "Popular"
         menuItem1531 = d.querySelectorAll('.menu-item-1531 > a'), //"All My Repacks, A-Z" to "All (A-Z)"
         menuItem1707 = d.querySelectorAll('.menu-item-1707 > a'), //"Repack Troubleshooting" to "Troubleshooting"
@@ -37,16 +37,23 @@
                                                              Japanese Games
                                                              <iframe src="https://www.youtube.com/embed/IFzUTKsrbN8" allowfullscreen="" width="100%" frameborder="0"></iframe>`;
 
-    //Move No Request Banner to the top of the page
+    //Move the No Request Banner to the top of all the pages, maybe people will learn no to ask this way
     let noRequests = d.querySelector('#post-36778 > div > div:nth-child(4) > p:nth-child(7)');
     let bannerParent = d.querySelector('#main-content');
     let banner = d.createElement('div');
     banner.setAttribute('class', 'banner');
-    banner.innerHTML = noRequests.innerHTML;
-    noRequests.remove();
+    banner.innerHTML = 'DO NOT ASK FOR ANY PARTICULAR REPACKS IN COMMENTS. I NEVER SERVE REQUESTS.';
+
+    //Trying to remove the original banner that was buried below, but if its not there move on
+    try {
+       noRequests.remove();
+    } catch(err) {
+       console.log('No Old Banner Found');
+    }
+
     bannerParent.prepend(banner);
 
-    //Move Todays Popular repack list from footer to side bar alignside with the Weeks repacks
+    //Move Todays Popular repack list from footer to side bar alignside with the Weeks repacks, seems more consistent them being right after another on the side bar
     let todaysPopularData = d.querySelector('#block-6 > div > div > div').innerHTML;
     let todaysPopular = d.createElement('aside');
     todaysPopular.setAttribute('class', 'widget widget_block');
@@ -59,22 +66,22 @@
     let rightSideBar = d.querySelector('#content-sidebar');
     rightSideBar.insertBefore(todaysPopular, rightSideBar.children[1]);
 
-    //Touch up on torrent data from torrent-stats as its an image its getting the global image shadow, not pretty.
+    //Get all images and filter to the ones for torrent data from torrent-stats per post, as its an image its getting the global image shadow styles, and it wasnt pretty.
     let allImages = Array.from(d.querySelectorAll("img")).map((img) => {
         if (img.src.includes('torrent-stats')) {
            img.style.boxShadow = 'none';
            img.style.pointerEvents = "none";
+
         }
     });
 
-    //Remove unnecesary info from footer now that i was moved to the side
+    //Remove unnecesary info from footer now that i was moved to the right side
     d.querySelector('#supplementary').remove()
 
-    // :)
+    // Cute signature :)
     d.querySelector('#colophon > div > a').innerHTML = 'Proudly powered by WordPress and blissfully populated by FitGirl'
 
-
-    //General text rework
+    //General text rework for all the menu items above, looping casue they all have 2 instances at the site this way both change at the same time
     menuItem40173.forEach((e) => {
         e.innerText = 'Popular';
     });
@@ -108,8 +115,10 @@
     });
 
 
-
-
+//-------------------
+// Styles begin here!
+// NOTE: Most likely more can be done or cleaner, for now its funcional, annotated all changes
+//-------------------
 
     GM_addStyle(`
 
@@ -122,6 +131,13 @@ body {
    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
+/* Fix crypto table width */
+table {
+   table-layout: fixed;
+}
+
+/* Add cute transition effect and small shadows to all images to make them pop a bit*/
+
 img {
    transition: all 1s ease;
    box-shadow: rgba(0, 0, 0, 1) 0px 3px 8px;
@@ -131,9 +147,10 @@ img:hover {
    transform: scale(1.1);
 }
 
-/* No requets banner relocation */
+/* No Requets banner relocation and adding bit of responsiveness*/
 
 .banner {
+   color: #ff0000;
    margin-top: 12px;
    margin-left: 230px;
    padding: 10px;
@@ -266,9 +283,7 @@ img:hover {
     }
 }
 
-
-
-/* Remove the black bar after the side bar is finished */
+/* Remove the black bar after the side bar is finished as its being gracefully fadeout to merge with the center content*/
 
 @media screen and (min-width: 1008px) {
     .site:before {
@@ -303,7 +318,6 @@ img:hover {
    border-bottom-left-radius: 10px;
 }
 
-
 /* Fix site description below logo to be more readable*/
 
 .site-description {
@@ -321,7 +335,7 @@ img:hover {
    font-size: 16px !important;
 }
 
-/* Primary sidebar below navigation adjustments more centered and allow for more space to be used*/
+/* Primary sidebar below navigation adjustments more centered and allow for more space to be used */
 
 .primary-sidebar {
    margin-right: -15px;
@@ -333,7 +347,7 @@ img:hover {
    border-radius: 25px !important;
 }
 
-/* Match Subscribe button to Donate */
+/* Match Subscribe button to Donate as best possible */
 
 .wp-block-button__link{
    font-size: 18px !important;
@@ -358,7 +372,7 @@ aside > h1 {
    text-align: center;
 }
 
-/* Reset FG image with request for support */
+/* Reset FG image with request for support, make it more centered and visible */
 
 #block-4 > center > a > img {
    box-shadow: none;
@@ -367,7 +381,7 @@ aside > h1 {
    margin-left: 20px !important;
 }
 
-/* Make swiper buttons visible*/
+/* Make swiper buttons visible as they are overlapping the images */
 
 .swiper-button-next, .swiper-button-prev{
    color: #f887ff !important;
@@ -376,7 +390,7 @@ aside > h1 {
    --swiper-navigation-size: 20px;
 }
 
-/* Repeated style accross all articles that was breaking the centering of the posts*/
+/* Repeated style accross all articles that was breaking the centering of the posts */
 
 .hentry {
    margin-right: 0 !important;
@@ -398,7 +412,7 @@ aside > h1 {
    width: 97% !important;
 }
 
-/* Center widget cation text */
+/* Center widget caption text */
 
 .jetpack_top_posts_widget {
    text-align: center;
@@ -411,6 +425,8 @@ aside > h1 {
 }
 
     `);
-    
+
+    //Just checking that this script is working
     console.log('Is it pretty yet?');
+
 })();
