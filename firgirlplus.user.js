@@ -39,7 +39,7 @@
 
     //Move the No Request Banner to the top of all the pages, maybe people will learn no to ask this way
     let noRequests = d.querySelector('#post-36778 > div > div:nth-child(4) > p:nth-child(7)');
-    let bannerParent = d.querySelector('#main-content');
+    let bannerParent = d.querySelector('.main-content') || d.querySelector('.content-area');
     let banner = d.createElement('div');
     banner.setAttribute('class', 'banner');
     banner.innerHTML = 'DO NOT ASK FOR ANY PARTICULAR REPACKS IN COMMENTS. I NEVER SERVE REQUESTS.';
@@ -52,6 +52,16 @@
     }
 
     bannerParent.prepend(banner);
+
+    //Some of the sub pages are not consistent in structure with the main ones, some of the IDs and Classes, or HTML tags differ, this section adjusts those that i have found so far.
+    //Affected pages so far are: https://fitgirl-repacks.site/category/uncategorized/ and https://fitgirl-repacks.site/<game-name>/
+    if (bannerParent.id === 'primary') {
+       banner.style.marginTop = '-60px';
+       banner.style.marginBottom = '20px';
+       let support = d.querySelector('#block-4 > center > a > img');
+       support.style.position = 'relative';
+       support.style.top = '40px';
+    }
 
     //Move Todays Popular repack list from footer to side bar alignside with the Weeks repacks, seems more consistent them being right after another on the side bar
     let todaysPopularData = d.querySelector('#block-6 > div > div > div').innerHTML;
@@ -71,7 +81,6 @@
         if (img.src.includes('torrent-stats')) {
            img.style.boxShadow = 'none';
            img.style.pointerEvents = "none";
-
         }
     });
 
