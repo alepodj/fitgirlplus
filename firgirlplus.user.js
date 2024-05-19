@@ -23,7 +23,9 @@
         menuItem40169 = d.querySelectorAll('.menu-item-40169 > a'), //"Top 150 Repacks of The Year" to "Top 150 (Year)"
         menuItem27870 = d.querySelectorAll('.menu-item-27870 > a'), //"Games with my personal Pink Paw Award" to "Pink Paw Awards"
         menuItem19963 = d.querySelectorAll('.menu-item-19963 > a'), //"Switch Emulated Repacks" to "Switch Emulated"
-        menuItem19960 = d.querySelectorAll('.menu-item-19960 > a'); //"PS3 Emulated Repacks" to "PS3 Emulated"
+        menuItem19960 = d.querySelectorAll('.menu-item-19960 > a'), //"PS3 Emulated Repacks" to "PS3 Emulated"
+        menuItem41273 = d.querySelectorAll('.menu-item-41273 > a'), //"Updates List" to "Updates"
+        menuItem41375 = d.querySelectorAll('.menu-item-41375 > a'); //"Updates Digests" to "Digests"
 
     d.querySelector('#custom_html-2 > h1').innerHTML = 'RSS FEED';
     d.querySelector('#custom_html-2 > div').innerHTML = 'Get the latest updates automatically via: <a href="http://fitgirl-repacks.site/feed/"><b>RSS FEED</b></a>';
@@ -123,6 +125,13 @@
         e.innerText = 'PS3 Emulated';
     });
 
+    menuItem41273.forEach((e) => {
+        e.innerText = 'Updates';
+    });
+
+    menuItem41375.forEach((e) => {
+        e.innerText = 'Digests';
+    });
 
 //-------------------
 // Styles begin here!
@@ -130,8 +139,9 @@
 //-------------------
 
     GM_addStyle(`
-
+/********************************************************************/
 /* Center the site and remove dark background and other site globals*/
+/********************************************************************/
 
 body {
    max-width: max-content;
@@ -140,12 +150,18 @@ body {
    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
-/* Fix crypto table width */
+/********************************************************************/
+/* Fix crypto table width                                           */
+/********************************************************************/
+
 table {
    table-layout: fixed;
 }
 
-/* Add cute transition effect and small shadows to all images to make them pop a bit*/
+/********************************************************************/
+/* Add cute transition effect and small shadows to all images to    */
+/* make them pop a bit                                              */
+/********************************************************************/
 
 img {
    transition: all 1s ease;
@@ -156,7 +172,9 @@ img:hover {
    transform: scale(1.1);
 }
 
-/* No Requets banner relocation and adding bit of responsiveness*/
+/********************************************************************/
+/* No Requets banner relocation and adding bit of responsiveness    */
+/********************************************************************/
 
 .banner {
    color: #ff0000;
@@ -188,8 +206,9 @@ img:hover {
     }
 }
 
-
-/* Lighten up the website side bars and nav bars */
+/********************************************************************/
+/* Lighten up the website side bars and nav bars                    */
+/********************************************************************/
 
 #secondary {
    /*background-color: #333333 !important;*/
@@ -214,7 +233,9 @@ img:hover {
    padding-bottom: 5px;
 }
 
-/* Search button and bar adjustments and rounding */
+/********************************************************************/
+/* Search button and bar adjustments and rounding                   */
+/********************************************************************/
 
 .search-toggle {
    transition: all 1s ease;
@@ -247,7 +268,9 @@ img:hover {
     }
 }
 
-/* Logo adjustments */
+/********************************************************************/
+/* Logo adjustments and some responsiveness                         */
+/********************************************************************/
 
 .site-title {
    font-size: 24px;
@@ -255,21 +278,39 @@ img:hover {
    margin-left: -10px;
 }
 
-/* Increase font of the Nav menu */
+@media screen and (max-width: 673px) {
+    .site-title {
+        margin-left: 0px;
+    }
+}
+
+/********************************************************************/
+/* Increase font of the Nav menu and some responsiveness            */
+/********************************************************************/
 
 .site-navigation {
-   font-size: 13px;
+   font-size: 14px;
    font-weight: bold;
 }
 
-/* Post navigation links adjustments */
+@media screen and (max-width: 1008px) {
+    .site-navigation {
+        font-size: 11px;
+    }
+}
+
+/********************************************************************/
+/* Post navigation links adjustments                                */
+/********************************************************************/
 
 .post-navigation, .image-navigation {
     max-width: 740px;
     margin-left: 10px;
 }
 
-/* Move search button when site compresses and hamburger appears */
+/********************************************************************/
+/* Move search button when site compresses and hamburger appears    */
+/********************************************************************/
 
 @media screen and (max-width: 782px) {
     .search-toggle {
@@ -291,15 +332,22 @@ img:hover {
     }
 }
 
-/* Adjust center content column so it doesnt overlap the side bar on the right */
+/********************************************************************/
+/* Adjust center content column so it doesnt overlap the side bar on*/
+/* the right                                                        */
+/********************************************************************/
 
-@media screen and (min-width: 1080px) {
+@media screen and (min-width: 1008) {
     .site-content, .site-main .widecolumn {
-        margin-left: 180px;
+        margin-left: 100px;
+        margin-right: 0 !important;
     }
 }
 
-/* Remove the black bar after the side bar is finished as its being gracefully fadeout to merge with the center content*/
+/********************************************************************/
+/* Remove the black bar after the side bar is finished as its being */
+/* gracefully fadeout to merge with the center content              */
+/********************************************************************/
 
 @media screen and (min-width: 1008px) {
     .site:before {
@@ -307,10 +355,14 @@ img:hover {
         background-color: #fff;
     }
 
-/* Fix side bar and top bar menus, make them blow out and rounded, submenus the same but reverse */
+/********************************************************************/
+/* Fix side bar and top bar menus, make them blow out and rounded,  */
+/* submenus the same but reverse                                    */
+/********************************************************************/
 
 @media screen and (min-width: 1008px) {
     #secondary .menu-item-40173 > a,
+    #secondary .menu-item-41273 > a,
     #secondary .menu-item-1531 > a,
     #secondary .menu-item-1532 > a,
     #secondary .menu-item-1533 > a,
@@ -321,27 +373,46 @@ img:hover {
     }
 }
 
-#secondary .menu-item-40173 > ul, #secondary .menu-item-40101 > a, #secondary .menu-item-1531 > ul, #secondary .menu-item-27870 > a  {
+#secondary .menu-item-40173 > ul,
+#secondary .menu-item-40101 > a,
+#secondary .menu-item-41273 > ul,
+#secondary .menu-item-41375 > a,
+#secondary .menu-item-1531 > ul,
+#secondary .menu-item-27870 > a  {
    border-top-right-radius: 10px;
 }
 
-#secondary .menu-item-40173 > ul, #secondary .menu-item-40169 > a, #secondary .menu-item-1531 > ul, #secondary .menu-item-19960 > a  {
+#secondary .menu-item-40173 > ul,
+#secondary .menu-item-41273 > ul,
+#secondary .menu-item-41375 > a,
+#secondary .menu-item-40169 > a,
+#secondary .menu-item-1531 > ul,
+#secondary .menu-item-19960 > a  {
    border-bottom-right-radius: 10px;
 }
 
-#menu-item-40173 > ul, #menu-item-40169 > a, #menu-item-1531 > ul, #menu-item-19960 > a {
+#menu-item-40173 > ul,
+#menu-item-40169 > a,
+#menu-item-41273 > ul,
+#menu-item-41375 > a,
+#menu-item-1531 > ul,
+#menu-item-19960 > a {
    border-bottom-right-radius: 10px;
    border-bottom-left-radius: 10px;
 }
 
-/* Fix site description below logo to be more readable*/
+/********************************************************************/
+/* Fix site description below logo to be more readable              */
+/********************************************************************/
 
 .site-description {
    margin: 0px -15px 10px 0;
    text-align: justify;
 }
 
-/* Widget titles bigger and widgets more compact*/
+/********************************************************************/
+/* Widget titles bigger and widgets more compact                    */
+/********************************************************************/
 
 .widget {
    margin-bottom: 25px;
@@ -351,19 +422,26 @@ img:hover {
    font-size: 16px !important;
 }
 
-/* Primary sidebar below navigation adjustments more centered and allow for more space to be used */
+/********************************************************************/
+/* Primary sidebar below navigation adjustments more centered and   */
+/* allow for more space to be used                                  */
+/********************************************************************/
 
 .primary-sidebar {
    margin-right: -15px;
 }
 
-/* Round up Donate button */
+/********************************************************************/
+/* Round up Donate button                                           */
+/********************************************************************/
 
 #lbjoin2 {
    border-radius: 25px !important;
 }
 
-/* Match Subscribe button to Donate as best possible */
+/********************************************************************/
+/* Match Subscribe button to Donate as best possible                */
+/********************************************************************/
 
 .wp-block-button__link{
    font-size: 18px !important;
@@ -377,7 +455,9 @@ img:hover {
     width: 100%;
 }
 
-/* Separate aside widgets */
+/********************************************************************/
+/* Separate aside widgets                                           */
+/********************************************************************/
 
 aside {
    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -388,16 +468,20 @@ aside > h1 {
    text-align: center;
 }
 
-/* Reset FG image with request for support, make it more centered and visible */
+/********************************************************************/
+/* Reset FG image with request for support, make it more centered   */
+/* and visible                                                      */
+/********************************************************************/
 
 #block-4 > center > a > img {
-   box-shadow: none;
+   box-shadow: none !important;
    width: 70%;
    margin-top: 30px !important;
    margin-left: 20px !important;
-}
 
-/* Make swiper buttons visible as they are overlapping the images */
+/********************************************************************/
+/* Make swiper buttons visible as they are overlapping the images   */
+/********************************************************************/
 
 .swiper-button-next, .swiper-button-prev{
    color: #f887ff !important;
@@ -406,7 +490,10 @@ aside > h1 {
    --swiper-navigation-size: 20px;
 }
 
-/* Repeated style accross all articles that was breaking the centering of the posts */
+/********************************************************************/
+/* Repeated style accross all articles that was breaking the        */
+/* centering of the posts, reset                                    */
+/********************************************************************/
 
 .hentry {
    margin-right: 0 !important;
@@ -415,26 +502,35 @@ aside > h1 {
    margin-left: 28px !important;
 }
 
-/* Fix entry headers being too large and overlapping side bar on the right*/
+/********************************************************************/
+/* Fix entry headers being too large and overlapping side bar on    */
+/* the right                                                        */
+/********************************************************************/
 
 .entry-header, .entry-content{
    margin-right: 0 !important;
    padding-right: 0 !important;
 }
 
-/* Center spoiler drop downs*/
+/********************************************************************/
+/* Center spoiler drop downs                                        */
+/********************************************************************/
 
 .su-spoiler {
    width: 97% !important;
 }
 
-/* Center widget caption text */
+/********************************************************************/
+/* Center widget caption text                                       */
+/********************************************************************/
 
 .jetpack_top_posts_widget {
    text-align: center;
 }
 
-/* Footer fixes */
+/********************************************************************/
+/* Footer fixes                                                     */
+/********************************************************************/
 
 .site-info, .site-footer {
    text-align: center;
