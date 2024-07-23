@@ -337,10 +337,33 @@ img:hover {
 /* the right                                                        */
 /********************************************************************/
 
-@media screen and (min-width: 1008) {
+@media screen and (min-width: 1080px) {
     .site-content, .site-main .widecolumn {
-        margin-left: 100px;
-        margin-right: 0 !important;
+        margin-left: 180px;
+    }
+}
+
+@media screen and (min-width: 1008px) {
+    .site-content {
+        margin-right: 220px;
+    }
+}
+
+@media screen and (max-width: 1218px) {
+    .site-content {
+        margin-right: 260px;
+    }
+}
+
+@media screen and (max-width: 1008px) {
+    .site-content {
+        margin-right: 220px;
+    }
+}
+
+@media screen and (max-width: 672px) {
+    .site-content {
+        margin-right: 0px;
     }
 }
 
